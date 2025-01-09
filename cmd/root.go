@@ -43,10 +43,16 @@ var rootCmd = &cobra.Command{
 		if result, err = excel2json.GetCsvFilePath(path, delimited, headers); err != nil {
 			log.Fatalf(`unable to parse file, error: %s`, err)
 		}
-		for _, val := range result {
+		fmt.Println("[")
+		length := len(result) - 1
+		for i, val := range result {
 			result, _ := json.Marshal(val)
 			fmt.Println(string(result))
+			if i < length {
+				fmt.Println(",")
+			}
 		}
+		fmt.Println("]")
 	},
 }
 
